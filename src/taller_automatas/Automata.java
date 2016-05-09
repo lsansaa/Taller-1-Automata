@@ -57,14 +57,14 @@ public class Automata {
                     /* Por cada linea leida se cuenta un estado */
                     listaEstados.add("q"+cantEstados);
                     /* Guardo cada transicion separada por comas en el arreglo transiciones */
-                    String[] transiciones = linea.split(", ");
+                    String[] transiciones = linea.substring(4,linea.length()).split(", ");
                     for (String trans: transiciones) {
                         /* Si es que mi transicion leida tiene un *, quiere decir que es un estado final y no una transicion */
                         if (trans.contains("*")) {
                             listaEstadosFinales.add("q"+cantEstados);
                         } else {
                             /* Caso contrario, guardo mi transicion en la lista transiciones */
-                            listaTransiciones.add(trans);
+                            listaTransiciones.add("q"+cantEstados+": "+trans);
                         }
                     }
                 }
