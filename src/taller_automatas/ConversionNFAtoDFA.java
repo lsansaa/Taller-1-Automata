@@ -14,6 +14,7 @@ public class ConversionNFAtoDFA {
     private int cantEstados;
     private int cantAlfabeto;
     private Automata DFA;
+    private int prueba;
     
     public ConversionNFAtoDFA(Automata NFA){
     
