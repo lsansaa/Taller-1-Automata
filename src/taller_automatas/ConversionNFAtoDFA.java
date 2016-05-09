@@ -16,7 +16,7 @@ public class ConversionNFAtoDFA {
     private Automata DFA;
     //private Automata NFA;
     
-    private int prueba;
+    private int prueba2;
     
     public ConversionNFAtoDFA(Automata NFA){
     
