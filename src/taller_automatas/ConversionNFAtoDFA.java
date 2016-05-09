@@ -16,6 +16,8 @@ public class ConversionNFAtoDFA {
     private Automata DFA;
     //private Automata NFA;
     
+    private int prueba;
+    
     public ConversionNFAtoDFA(Automata NFA){
     
         this.DFA = new Automata();  
