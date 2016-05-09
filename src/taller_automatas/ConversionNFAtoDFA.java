@@ -14,6 +14,7 @@ public class ConversionNFAtoDFA {
     private int cantEstados;
     private int cantAlfabeto;
     private Automata DFA;
+    //private Automata NFA;
     
     public ConversionNFAtoDFA(Automata NFA){
     
@@ -27,7 +28,16 @@ public class ConversionNFAtoDFA {
     
     private void Conversion(Automata NFA){
         
+        String[][] matrizNFA = new String[this.cantAlfabeto+1][this.cantEstados];
         
-        
+        for(int i=0;i <this.cantAlfabeto; i++){
+            String caracter = NFA.alfabeto.get(i);  
+            for(int j=0;j <this.cantEstados; j++){
+                String estado = NFA.listaEstados.get(j);
+                for(String trans:NFA.listaTransiciones){
+                    
+                }
+            }
+        }
     }
 }
