@@ -23,9 +23,9 @@ public class ConversionNFAtoDFA {
         this.DFA = new Automata();  
         this.cantEstados = NFA.listaEstados.size();
         this.cantAlfabeto = NFA.alfabeto.size();
-        //Conversion(NFA);
-        System.out.println(this.cantEstados);
-        System.out.println(this.cantAlfabeto);
+//        Conversion(NFA);
+//        System.out.println(this.cantEstados);
+//        System.out.println(this.cantAlfabeto);
     }
     
     private void Conversion(Automata NFA){
@@ -40,17 +40,19 @@ public class ConversionNFAtoDFA {
                 String estado = NFA.listaEstados.get(j);
                 for(String trans:NFA.listaTransiciones){
                     aux = trans.split(":");
-                    if(aux[1].equals(estado)){
+                    if(aux[0].equals(estado)){
                         aux2 = aux[1].split("-");
                         if(aux2[0].equals(caracter)){
                             matrizNFA[i][j] = aux2[1];
                         }
                     }
                 }
-                if(matrizNFA[i][j].isEmpty()) {
+                if(matrizNFA[i][j]==null) {
                     matrizNFA[i][j]="-";
                 }
+                System.out.print(matrizNFA[i][j]+" ");
             }
+            System.out.println();
         }
     }
 }

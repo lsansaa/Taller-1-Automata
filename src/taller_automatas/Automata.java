@@ -76,23 +76,23 @@ public class Automata {
                  * Imprimo los estados finales
                  * Imprimo las transiciones
                  */
-                System.out.println("Cantidad de Estados: "+cantEstados);
-                System.out.println("Cantidad de Transiciones: "+listaTransiciones.size());
-                System.out.println("Estados:");
-                listaEstados.stream().forEach((estados) -> {
-                    System.out.println(estados);
-                });
-                System.out.println("Estados Finales:");
-                listaEstadosFinales.stream().forEach((estados) -> {
-                    System.out.println(estados);
-                });
-                System.out.println("Transiciones:");
-                listaTransiciones.stream().forEach((transiciones) -> {
-                    System.out.println(transiciones);
-                });
-                alfabeto.stream().forEach((car)->{
-                    System.out.println(car);
-                });
+//                System.out.println("Cantidad de Estados: "+cantEstados);
+//                System.out.println("Cantidad de Transiciones: "+listaTransiciones.size());
+//                System.out.println("Estados:");
+//                listaEstados.stream().forEach((estados) -> {
+//                    System.out.println(estados);
+//                });
+//                System.out.println("Estados Finales:");
+//                listaEstadosFinales.stream().forEach((estados) -> {
+//                    System.out.println(estados);
+//                });
+//                System.out.println("Transiciones:");
+//                listaTransiciones.stream().forEach((transiciones) -> {
+//                    System.out.println(transiciones);
+//                });
+//                alfabeto.stream().forEach((car)->{
+//                    System.out.println(car);
+//                });
             }
                 
 	    } 
