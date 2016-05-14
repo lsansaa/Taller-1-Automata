@@ -18,14 +18,23 @@ public class Automata {
     ArrayList<String> listaEstados;
     ArrayList<String> listaTransiciones;
     ArrayList<String> listaEstadosFinales;
-    ArrayList<String> alfabeto;
+    ArrayList<String> listaAlfabeto;
     /* Leo el archivo desde el directorio por defecto */
     public Automata (){
         
-    listaEstados = new ArrayList();
-    listaTransiciones = new ArrayList();
-    listaEstadosFinales = new ArrayList();
-    alfabeto = new ArrayList();
+        this.listaEstados = new ArrayList();
+        this.listaTransiciones = new ArrayList();
+        this.listaEstadosFinales = new ArrayList();
+        this.listaAlfabeto = new ArrayList();
+    
+    }
+    
+    public Automata (ArrayList<String> estados,ArrayList<String> transiciones,ArrayList<String> estadosFinales,ArrayList<String> alfabeto){
+        
+        this.listaEstados = estados;
+        this.listaTransiciones = transiciones;
+        this.listaEstadosFinales = estadosFinales;
+        this.listaAlfabeto = alfabeto;
     
     }
         
@@ -46,7 +55,7 @@ public class Automata {
                 //contruccion alfabeto
                 for(String cha:caracter){
                     //System.out.println(caracter[i]);
-                    alfabeto.add(cha);
+                    listaAlfabeto.add(cha);
                 }
                 
                 System.out.println("El Lenguaje aceptado para el automata es: "+lenguaje+(char)949);
