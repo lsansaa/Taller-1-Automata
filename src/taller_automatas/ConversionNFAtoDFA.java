@@ -15,29 +15,30 @@ public class ConversionNFAtoDFA {
     
     private int cantEstados;
     private int cantAlfabeto;
-    private Automata DFA;
-    //private Automata NFA;
+    //private Automata DFA;
+    private Automata NFA;
     
     public ConversionNFAtoDFA(Automata NFA){
     
-        this.DFA = new Automata();  
+        //this.DFA = new Automata();
+        this.NFA = NFA;
         this.cantEstados = NFA.listaEstados.size();
         this.cantAlfabeto = NFA.listaAlfabeto.size();
-        Conversion(NFA);
+        Conversion();
 //        System.out.println(this.cantEstados);
 //        System.out.println(this.cantAlfabeto);
     }
     
-    private void Conversion(Automata NFA){
+    private void Conversion(){
         
-        String[][] matrizNFA = MatrizNFA(NFA);
+        String[][] matrizNFA = MatrizNFA(this.NFA);
         
-        for(int i=0;i<this.cantEstados;i++){
-            for(int j=0; j<this.cantAlfabeto+1; j++){
-            System.out.print(matrizNFA[i][j]+" ");
-            }
-            System.out.println("");
-        }
+//        for(int i=0;i<this.cantEstados;i++){
+//            for(int j=0; j<this.cantAlfabeto+1; j++){
+//            System.out.print(matrizNFA[i][j]+" ");
+//            }
+//            System.out.println("");
+//        }
         Automata DFA = DFAResultante(matrizNFA);
         
     }
@@ -63,7 +64,7 @@ public class ConversionNFAtoDFA {
                         aux2[0] = aux2[0].replaceAll("\\s", "");
                         aux2[1] = aux2[1].replaceAll("\\s", "");
                         String caracterTransicion = aux2[0];
-                        if(caracterTransicion.equals(caracter)){
+                        if(caracterTransicion.trim().equals(caracter.trim())){
                             if(caracter.equals("epsilon")){
                                 if(matrizNFA[i][j]==null){
                                     matrizNFA[i][j] = estado;
@@ -98,33 +99,103 @@ public class ConversionNFAtoDFA {
         Automata DFA = new Automata();
         ArrayList<String> estadosDFA = new ArrayList();
         ArrayList<String> transicionesDFA = new ArrayList();
-        ArrayList<String> alfabeto = new ArrayList();
+        ArrayList<String> alfabetoDFA;
         //variables para estados
         int posicionEps;
         //variables para transiciones
         String transiciónActual;
         
-        //Obtener los estados
-        posicionEps = this.cantAlfabeto;
+        //Reescribir matriz
         for(int i = 0;i<this.cantEstados;i++){
-            boolean estadosDFAVacio = estadosDFA.isEmpty();
-            if(estadosDFAVacio){
-                estadosDFA.add(matrizNFA[i][posicionEps]);
-            }else{
-                boolean estadoRepetido= estadosDFA.contains(matrizNFA[i][posicionEps]);
-                if(!estadoRepetido){
-                    estadosDFA.add(matrizNFA[i][posicionEps]);
+            for(int j=0;j<this.cantAlfabeto;j++){
+                for(int k=0;k<this.cantEstados;k++){
+                    String[] estadosContenidos = matrizNFA[k][cantAlfabeto].split(",");
+                    if(estadosContenidos[0].equals(matrizNFA[i][j])){                        
+                        matrizNFA[i][j] = matrizNFA[k][cantAlfabeto];
+                        break;
+                    }
                 }
             }
         }
         
-        //Obtener estados de las transiciones
+        for(int i=0;i<this.cantEstados;i++){
+            for(int j=0; j<this.cantAlfabeto+1; j++){
+            System.out.print(matrizNFA[i][j]+" ");
+            }
+            System.out.println("");
+        }
+        
+        //Obtener los estados
+        int contador = 0;
+        posicionEps = this.cantAlfabeto;
+        for(int i = 0;i<this.cantEstados;i++){
+            for(int j=0;j<this.cantAlfabeto;j++){
+                boolean estadosDFAVacio = estadosDFA.isEmpty();
+                if(estadosDFAVacio){
+                    estadosDFA.add(matrizNFA[i][j]);
+                //    System.out.println(estadosDFA.get(contador));
+                }else{
+                    boolean estadoRepetido = false;
+                    for(String estadoDelDFA:estadosDFA){
+                        estadoRepetido= estadosDFA.contains(matrizNFA[i][j])||sonIguales(estadoDelDFA,matrizNFA[i][j]);
+                    }
+                    if(!estadoRepetido){
+                        estadosDFA.add(matrizNFA[i][j]);
+                        contador++;
+                //        System.out.println(estadosDFA.get(contador));
+                    }
+                }
+            }
+        }
+        
+        //Obtener las transiciones
+        
+        for(String estado:estadosDFA){
+            
+            for(int i = 0;i<this.cantEstados;i++){
+                boolean estadosIguales = estado.equals(matrizNFA[i][this.cantAlfabeto]);
+                if(estadosIguales){
+                    String transicion = "vacio";
+                    for(int j = 0;j<this.cantAlfabeto;j++){
+                        String caracter = this.NFA.listaAlfabeto.get(j);
+                        if(j==0){
+                            transicion = estado+": "+caracter+" – "+matrizNFA[i][j];
+                            
+                        }else{
+                            transicion = transicion+", "+caracter+" – "+matrizNFA[i][j];
+                        }
+                    }
+                    transicionesDFA.add(transicion);
+                    System.out.println(transicion);
+                }
+                
+            }
+        }
+        
+        //Obtener alfabeto
+        
+        alfabetoDFA = this.NFA.listaAlfabeto;
         
         
-        
-        
-        //DFA = new Automata(estadosDFA);
+        //DFA = new Automata(estadosDFA,transicionesDFA, alfabetoDFA);
         return DFA;
+    }
+    
+    public boolean sonIguales(String a, String b) {
+        boolean contiene = false;
+        if (a.length() != b.length()) {
+            return contiene;
+        }
+        String[] aux = a.split(",");
+        for (String estados: aux) {
+            if (b.contains(estados)) {
+                contiene = true;
+            } else {
+                contiene = false;
+                return contiene;
+            }
+        }
+        return contiene;
     }
 
 }
