@@ -24,6 +24,8 @@ public class Taller_Automatas {
         String nombre = lectura.readLine();
         Automata at = new Automata();
         at.LecturaNFA(nombre);
-        ConversionNFAtoDFA conversion = new ConversionNFAtoDFA (at);
+        Conversion conversionNFAtoDFA = new Conversion();
+        Automata DFAResultante = conversionNFAtoDFA.ConversionNFAtoDFA(at);
+        
     }
 }

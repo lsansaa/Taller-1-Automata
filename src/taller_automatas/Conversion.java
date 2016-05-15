@@ -11,25 +11,27 @@ import java.util.ArrayList;
  *
  * @author Luis
  */
-public class ConversionNFAtoDFA {
+public class Conversion{
     
     private int cantEstados;
     private int cantAlfabeto;
     //private Automata DFA;
     private Automata NFA;
     
-    public ConversionNFAtoDFA(Automata NFA){
+    public Conversion(){}
+    
+    public Automata ConversionNFAtoDFA(Automata NFA){
     
         //this.DFA = new Automata();
         this.NFA = NFA;
         this.cantEstados = NFA.listaEstados.size();
         this.cantAlfabeto = NFA.listaAlfabeto.size();
-        Conversion();
+        return Conversion();
 //        System.out.println(this.cantEstados);
 //        System.out.println(this.cantAlfabeto);
     }
     
-    private void Conversion(){
+    private Automata Conversion(){
         
         String[][] matrizNFA = MatrizNFA(this.NFA);
         
@@ -39,7 +41,7 @@ public class ConversionNFAtoDFA {
 //            }
 //            System.out.println("");
 //        }
-        Automata DFA = DFAResultante(matrizNFA);
+        return DFAResultante(matrizNFA);
         
     }
     
@@ -96,10 +98,11 @@ public class ConversionNFAtoDFA {
     private Automata DFAResultante(String [][] matrizNFA){
         
         String[][] matrizDFA = matrizNFA;
-        Automata DFA = new Automata();
+        Automata DFA;
         ArrayList<String> estadosDFA = new ArrayList();
         ArrayList<String> transicionesDFA = new ArrayList();
         ArrayList<String> alfabetoDFA;
+        ArrayList<String> estadosAceptacionDFA = new ArrayList();
         //variables para estados
         int posicionEps;
         //variables para transiciones
@@ -166,7 +169,7 @@ public class ConversionNFAtoDFA {
                         }
                     }
                     transicionesDFA.add(transicion);
-                    System.out.println(transicion);
+//                    System.out.println(transicion);
                 }
                 
             }
@@ -176,8 +179,20 @@ public class ConversionNFAtoDFA {
         
         alfabetoDFA = this.NFA.listaAlfabeto;
         
+        //Obtener estados de Aceptación
         
-        //DFA = new Automata(estadosDFA,transicionesDFA, alfabetoDFA);
+        for(String estado: estadosDFA){
+            for(String estado2: this.NFA.listaEstadosFinales){
+                boolean estadoContieneEstado2 = estado.contains(estado2);
+                if(estadoContieneEstado2){
+                    estadosAceptacionDFA.add(estado);
+                    System.out.println(estado);
+                    break;
+                }
+            }
+        }
+        
+        DFA = new Automata(estadosDFA,transicionesDFA, estadosAceptacionDFA, alfabetoDFA);
         return DFA;
     }
     
