@@ -27,20 +27,12 @@ public class Conversion{
         this.cantEstados = NFA.listaEstados.size();
         this.cantAlfabeto = NFA.listaAlfabeto.size();
         return Conversion();
-//        System.out.println(this.cantEstados);
-//        System.out.println(this.cantAlfabeto);
     }
     
     private Automata Conversion(){
         
         String[][] matrizNFA = MatrizNFA(this.NFA);
-        
-//        for(int i=0;i<this.cantEstados;i++){
-//            for(int j=0; j<this.cantAlfabeto+1; j++){
-//            System.out.print(matrizNFA[i][j]+" ");
-//            }
-//            System.out.println("");
-//        }
+       
         return DFAResultante(matrizNFA);
         
     }
@@ -107,7 +99,12 @@ public class Conversion{
         int posicionEps;
         //variables para transiciones
         String transiciónActual;
-        
+                for(int i=0;i<this.cantEstados;i++){
+            for(int j=0; j<this.cantAlfabeto+1; j++){
+            System.out.print(matrizNFA[i][j]+" ");
+            }
+            System.out.println("");
+        }
         //Reescribir matriz
         for(int i = 0;i<this.cantEstados;i++){
             for(int j=0;j<this.cantAlfabeto;j++){
@@ -170,7 +167,8 @@ public class Conversion{
                     }
                     transicionesDFA.add(transicion);
 //                    System.out.println(transicion);
-                }
+                }//        System.out.println(this.cantEstados);
+//        System.out.println(this.cantAlfabeto);
                 
             }
         }

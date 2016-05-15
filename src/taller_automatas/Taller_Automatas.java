@@ -19,13 +19,21 @@ public class Taller_Automatas {
      */
     public static void main(String[] args) throws IOException {
         
+        //Leo por teclado el archivo a Convertir.
         BufferedReader lectura = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Ingrese Nombre del Archivo NFA a Convertir: ");
         String nombre = lectura.readLine();
+        //Creo el automata segun lo datos leidos en el archivo.
         Automata at = new Automata();
         at.LecturaNFA(nombre);
+        //Convierto el automata creado de NFA a DFA
         Conversion conversionNFAtoDFA = new Conversion();
+        //Obtengo el automata resultante
         Automata DFAResultante = conversionNFAtoDFA.ConversionNFAtoDFA(at);
+        //Creo el archivo de salida para Graphviz con el automata resultante.
+        SalidaNewDFA gg = new SalidaNewDFA();
+        gg.crearArchivo(DFAResultante);
+
         
     }
 }

@@ -40,7 +40,7 @@ public class Automata {
         
     public void LecturaNFA (String nombreArchivo){
         try {
-		File fileDir = new File(System.getProperty("user.dir")+"\\"+nombreArchivo+".txt");
+		File fileDir = new File(System.getProperty("user.dir")+"//"+nombreArchivo+".txt");
 			
             try (BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(fileDir), "UTF8"))) {
                 String linea;
@@ -52,9 +52,8 @@ public class Automata {
                 lenguaje = linea.substring(0, indice);
                 //System.out.println(lenguaje);
                 String[]caracter = lenguaje.split(" ");
-                //contruccion alfabeto
+                //construccion alfabeto
                 for(String cha:caracter){
-                    //System.out.println(caracter[i]);
                     listaAlfabeto.add(cha);
                 }
                 
@@ -77,31 +76,6 @@ public class Automata {
                         }
                     }
                 }
-                
-                /**
-                 * Imprimo cantidad de estados
-                 * Imprimo cantidad de transiciones
-                 * Imprimo los estados leidos en el archivo
-                 * Imprimo los estados finales
-                 * Imprimo las transiciones
-                 */
-//                System.out.println("Cantidad de Estados: "+cantEstados);
-//                System.out.println("Cantidad de Transiciones: "+listaTransiciones.size());
-//                System.out.println("Estados:");
-//                listaEstados.stream().forEach((estados) -> {
-//                    System.out.println(estados);
-//                });
-//                System.out.println("Estados Finales:");
-//                listaEstadosFinales.stream().forEach((estados) -> {
-//                    System.out.println(estados);
-//                });
-//                System.out.println("Transiciones:");
-//                listaTransiciones.stream().forEach((transiciones) -> {
-//                    System.out.println(transiciones);
-//                });
-//                alfabeto.stream().forEach((car)->{
-//                    System.out.println(car);
-//                });
             }
                 
 	    } 
